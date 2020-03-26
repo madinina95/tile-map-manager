@@ -2,7 +2,7 @@
 // Created by lionheart on 20/03/2020.
 //
 
-#include "TileMapManager.hpp"
+#include "../include/TileMapManager.hpp"
 
 TileMapManager::TileMapManager() : m_map(new TileMap()) {}
 

@@ -2,7 +2,7 @@
 // Created by lionheart on 22/03/2020.
 //
 
-#include "AnimatedTile.hpp"
+#include "../include/AnimatedTile.hpp"
 
 AnimatedTile::AnimatedTile(const int &tileId, const Tmx::Tile &tmxTile, const sf::Vector2i &position,
                            const Tileset &tileset) : PropertyTile(tileId, tmxTile, position, tileset),

@@ -26,6 +26,8 @@ private:
 
     void render();
 
+    void updateVisibleArea();
+
 private:
 
     sf::RenderWindow m_window;

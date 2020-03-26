@@ -2,7 +2,7 @@
 // Created by lionheart on 21/03/2020.
 //
 
-#include "Tile.hpp"
+#include "../include/Tile.hpp"
 
 Tile::Tile(const int &tileId, const sf::Vector2i &position, const Tileset &tileset) :
         m_tileId(tileId),

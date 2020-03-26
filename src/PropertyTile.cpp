@@ -2,7 +2,7 @@
 // Created by lionheart on 22/03/2020.
 //
 
-#include "PropertyTile.hpp"
+#include "../include/PropertyTile.hpp"
 
 PropertyTile::PropertyTile(const int &tileId, const Tmx::Tile &tmxTile, const sf::Vector2i &position,
                            const Tileset &tileset) : Tile(tileId,position, tileset),

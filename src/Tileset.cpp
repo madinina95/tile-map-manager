@@ -2,7 +2,7 @@
 // Created by lionheart on 21/03/2020.
 //
 
-#include "Tileset.hpp"
+#include "../include/Tileset.hpp"
 
 Tileset::Tileset(int id, const std::string &path, const sf::Vector2i &tileSize, const sf::Vector2i &tilesetSize,
                  const int &spacing) :

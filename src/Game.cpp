@@ -2,7 +2,7 @@
 // Created by lionheart on 20/03/2020.
 //
 
-#include "Game.hpp"
+#include "../include/Game.hpp"
 
 Game::Game() : m_timeSinceLastUpdate(sf::Time::Zero),
                m_timePerFrame(sf::seconds(0)) {
@@ -56,14 +56,22 @@ void Game::processEvents(sf::Event &event) {
         if(event.type == sf::Event::KeyPressed) {
             if(event.key.code == sf::Keyboard::Right) {
                 m_view.move(5, 0);
-                // la vue change alors on la set
-                sf::IntRect visibleArea;
-                visibleArea.top = m_view.getCenter().y - 50 - m_view.getSize().y / 2;
-                visibleArea.left = m_view.getCenter().x - 50 - m_view.getSize().x / 2;
-                visibleArea.height = m_view.getSize().y + 50;
-                visibleArea.width = m_view.getSize().x + 50;
-
-                m_tileMapManager.setVisibleArea(visibleArea);
+                updateVisibleArea();
+                m_window.setView(m_view);
+            }
+            if(event.key.code == sf::Keyboard::Left) {
+                m_view.move(-5, 0);
+                updateVisibleArea();
+                m_window.setView(m_view);
+            }
+            if(event.key.code == sf::Keyboard::Up) {
+                m_view.move(0, -5);
+                updateVisibleArea();
+                m_window.setView(m_view);
+            }
+            if(event.key.code == sf::Keyboard::Down) {
+                m_view.move(0, 5);
+                updateVisibleArea();
                 m_window.setView(m_view);
             }
         }
@@ -78,4 +86,15 @@ void Game::render() {
     m_window.clear();
     m_window.draw(m_tileMapManager);
     m_window.display();
+}
+
+void Game::updateVisibleArea() {
+    // la vue change alors on la set
+    sf::IntRect visibleArea;
+    visibleArea.top = m_view.getCenter().y - 50 - m_view.getSize().y / 2;
+    visibleArea.left = m_view.getCenter().x - 50 - m_view.getSize().x / 2;
+    visibleArea.height = m_view.getSize().y + 50;
+    visibleArea.width = m_view.getSize().x + 50;
+
+    m_tileMapManager.setVisibleArea(visibleArea);
 }

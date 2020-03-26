@@ -22,24 +22,24 @@ find_package(SFML COMPONENTS graphics window system audio REQUIRED)
 
 add_executable(tile-map-manager
         main.cpp
-        Game.hpp
-        Game.cpp
-        TileMapManager.cpp
-        TileMapManager.hpp
-        TileMap.cpp
-        TileMap.hpp
-        TileLayer.cpp
-        TileLayer.hpp
-        Tileset.cpp
-        Tileset.hpp
-        Tile.cpp
-        Tile.hpp
-        AnimatedTile.cpp
-        AnimatedTile.hpp
-        PropertyTile.cpp
-        PropertyTile.hpp
-        TileAnimation.cpp
-        TileAnimation.hpp
+        include/Game.hpp
+        src/Game.cpp
+        src/TileMapManager.cpp
+        include/TileMapManager.hpp
+        src/TileMap.cpp
+        include/TileMap.hpp
+        src/TileLayer.cpp
+        include/TileLayer.hpp
+        src/Tileset.cpp
+        include/Tileset.hpp
+        src/Tile.cpp
+        include/Tile.hpp
+        src/AnimatedTile.cpp
+        include/AnimatedTile.hpp
+        src/PropertyTile.cpp
+        include/PropertyTile.hpp
+        src/TileAnimation.cpp
+        include/TileAnimation.hpp
         )
 set_target_properties(tile-map-manager PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set_target_properties(tile-map-manager PROPERTIES OUTPUT_NAME tile-map-manager-bin)

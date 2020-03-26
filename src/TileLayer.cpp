@@ -2,8 +2,8 @@
 // Created by lionheart on 21/03/2020.
 //
 
-#include "TileMap.hpp"
-#include "TileLayer.hpp"
+#include "../include/TileMap.hpp"
+#include "../include/TileLayer.hpp"
 
 TileLayer::TileLayer(const Tmx::TileLayer &tmxLayer, const TileMap &map) :
         m_tmxTileLayer(tmxLayer),

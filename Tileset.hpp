@@ -19,12 +19,12 @@ public:
     ~Tileset();
 
 public:
+    int m_id;
     std::string m_path;
     const sf::Vector2i m_tileSize;
     const sf::Vector2i m_tilesetSize;
     const int m_spacing;
     std::unique_ptr<sf::Texture> m_texture;
-    int m_id;
 
 };
 

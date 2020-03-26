@@ -99,6 +99,8 @@ void TileMap::loadTileset(const int &id,const std::string &path, const sf::Vecto
 
 void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
+    states.transform *= getTransform();
+
     for (auto &tileLayer : m_tileLayers) {
         if(tileLayer->isVisible()) {
             tileLayer->setVisibleArea(m_visibleArea);

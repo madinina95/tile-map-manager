@@ -19,6 +19,7 @@ void TileMapManager::loadTileMap(const std::string& tmxFile) {
 
 void TileMapManager::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
+    states.transform *= getTransform();
     target.draw(*m_map);
 
 }

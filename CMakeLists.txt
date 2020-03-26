@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/modules)
 
+list(APPEND COMPILER_FLAGS_DEBUG "-O0" "-g" "-Wall" "-Wextra" "-pedantic")
+
 find_package(TinyXML2 REQUIRED)
 if(TINYXML2_FOUND)
     set( ${TINYXML2_LIBRARIES})

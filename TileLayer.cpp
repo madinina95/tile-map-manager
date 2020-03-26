@@ -96,6 +96,8 @@ void TileLayer::buildTiles() {
 
 void TileLayer::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
+    states.transform *= getTransform();
+
     for (int j = 0; j < m_height; ++j) {
         for (int i = 0; i < m_width; ++i) {
             if (m_tiles[i + j * m_width] != nullptr) {

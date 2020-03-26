@@ -1,0 +1,9 @@
+# IDEconfigurations file
+.idea
+
+# Compiled output
+bin/tile-map-manager-bin
+cmake-build-debug
+build
+
+# Others

@@ -5,7 +5,7 @@
 #include <memory>
 #include "../include/TileMap.hpp"
 
-TileMap::TileMap(){
+TileMap::TileMap() : m_drawTo(-1), m_drawFrom(-1) {
 
 }
 
@@ -43,7 +43,7 @@ void TileMap::generateTilesetList(Tmx::Map &map) {
     for (int i = 0; i < map.GetTilesets().size(); ++i) {
         const sf::Vector2i tileSize(map.GetTilesets()[i]->GetTileWidth(), map.GetTilesets()[i]->GetTileHeight());
         const sf::Vector2i tilesetSize(map.GetTilesets()[i]->GetImage()->GetWidth(),
-                                        map.GetTilesets()[i]->GetImage()->GetHeight());
+                                       map.GetTilesets()[i]->GetImage()->GetHeight());
 
         // TODO variabilise the path
         std::string root = "../map/tilesets/";
@@ -51,7 +51,7 @@ void TileMap::generateTilesetList(Tmx::Map &map) {
         const std::string path = root.append(map.GetTilesets()[i]->GetImage()->GetSource());
         const int spacing = map.GetTilesets()[i]->GetSpacing();
 
-        loadTileset(i, path, tileSize, tilesetSize,spacing);
+        loadTileset(i, path, tileSize, tilesetSize, spacing);
 
     }
 }
@@ -88,12 +88,14 @@ int TileMap::getNbLayers() const {
     return m_nbLayers;
 }
 
-void TileMap::loadTileset(const int &id,const std::string &path, const sf::Vector2i &tileSize, const sf::Vector2i &tilesetSize,
+void TileMap::loadTileset(const int &id, const std::string &path, const sf::Vector2i &tileSize,
+                          const sf::Vector2i &tilesetSize,
                           const int &spacing) {
-    std::unique_ptr<Tileset> ptr(new Tileset(id,path,tileSize, tilesetSize, spacing));
+    std::unique_ptr<Tileset> ptr(new Tileset(id, path, tileSize, tilesetSize, spacing));
     m_tilesetsMap.emplace(id, std::move(ptr));
 }
- Tileset &TileMap::getTileSet(const int &id) const {
+
+Tileset &TileMap::getTileSet(const int &id) const {
     return *m_tilesetsMap.at(id);
 }
 
@@ -101,11 +103,22 @@ void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
     states.transform *= getTransform();
 
-    for (auto &tileLayer : m_tileLayers) {
-        if(tileLayer->isVisible()) {
-            tileLayer->setVisibleArea(m_visibleArea);
+    if (m_drawTo != 1) {
+        for (int i = 0; i <= m_drawTo; ++i) {
+            if (m_tileLayers[i]->isVisible()) {
+                m_tileLayers[i]->setVisibleArea(m_visibleArea);
+                target.draw(*m_tileLayers[i], states);
+            }
         }
-        target.draw(*tileLayer);
+    }
+
+    if (m_drawFrom != 1) {
+        for (int i = m_drawFrom; i < m_tileLayers.size(); ++i) {
+            if (m_tileLayers[i]->isVisible()) {
+                m_tileLayers[i]->setVisibleArea(m_visibleArea);
+                target.draw(*m_tileLayers[i], states);
+            }
+        }
     }
 
 }
@@ -113,7 +126,7 @@ void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 void TileMap::update(sf::Time &dt) {
 
     for (const auto &tileLayer : m_tileLayers) {
-        if(tileLayer->isVisible() && tileLayer->isAnimated()) {
+        if (tileLayer->isVisible() && tileLayer->isAnimated()) {
             tileLayer->update(dt);
         }
     }
@@ -122,4 +135,21 @@ void TileMap::update(sf::Time &dt) {
 
 void TileMap::setVisibleArea(sf::IntRect &visibleArea) {
     m_visibleArea = visibleArea;
+}
+
+void TileMap::setDrawFrom(const int &index) {
+    m_drawFrom = index;
+}
+
+void TileMap::setDrawTo(const int &index) {
+    m_drawTo = index;
+}
+
+TileLayer &TileMap::getLayer(const std::string &name) {
+
+    for (const auto &layer : m_tileLayers) {
+        if(layer->getName() == name) {
+            return *layer;
+        }
+    }
 }

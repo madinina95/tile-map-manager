@@ -57,11 +57,13 @@ void Game::processEvents(sf::Event &event) {
             if(event.key.code == sf::Keyboard::Right) {
                 m_view.move(5, 0);
                 updateVisibleArea();
+                m_tileMapManager.getLayer(std::string("grass")).setVisible(true);
                 m_window.setView(m_view);
             }
             if(event.key.code == sf::Keyboard::Left) {
                 m_view.move(-5, 0);
                 updateVisibleArea();
+                m_tileMapManager.getLayer(std::string("grass")).setVisible(false);
                 m_window.setView(m_view);
             }
             if(event.key.code == sf::Keyboard::Up) {
@@ -84,6 +86,11 @@ void Game::update(sf::Time dt) {
 
 void Game::render() {
     m_window.clear();
+    m_tileMapManager.drawTo(2);
+    m_window.draw(m_tileMapManager);
+    // draw the player if you want
+    // apply other layers
+    m_tileMapManager.drawFrom(3);
     m_window.draw(m_tileMapManager);
     m_window.display();
 }

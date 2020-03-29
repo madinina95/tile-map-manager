@@ -20,7 +20,7 @@ void TileMapManager::loadTileMap(const std::string& tmxFile) {
 void TileMapManager::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
     states.transform *= getTransform();
-    target.draw(*m_map);
+    target.draw(*m_map, states);
 
 }
 
@@ -41,4 +41,16 @@ void TileMapManager::clearTileMap() {
 
 std::string &TileMapManager::getCurrentMap() {
     return m_cuurentMap;
+}
+
+void TileMapManager::drawFrom(int layerIndex) {
+    m_map->setDrawFrom(layerIndex);
+}
+
+void TileMapManager::drawTo(int layerIndex) {
+    m_map->setDrawTo(layerIndex);
+}
+
+TileLayer &TileMapManager::getLayer(const std::string &name) {
+    return m_map->getLayer(name);
 }

@@ -39,6 +39,12 @@ public:
 
     void setVisibleArea(sf::IntRect &visibleArea);
 
+    void setDrawFrom(const int &index);
+
+    void setDrawTo(const int& index);
+
+    TileLayer &getLayer(const std::string &name);
+
 
 protected:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
@@ -53,18 +59,18 @@ private:
                      const int &spacing);
 
 private:
-    std::vector<std::unique_ptr<TileLayer>> m_tileLayers;
-
     int m_width;
     int m_height;
     int m_tileWidth;
     int m_tileHeight;
     int m_nbLayers;
     int m_nbTilesets;
-    // La map contenant les ressources
-    std::unordered_map<int, std::unique_ptr<Tileset>> m_tilesetsMap;
 
+    int m_drawFrom;
+    int m_drawTo;
     sf::IntRect m_visibleArea;
+    std::vector<std::unique_ptr<TileLayer>> m_tileLayers;
+    std::unordered_map<int, std::unique_ptr<Tileset>> m_tilesetsMap;
 
 
 };

@@ -131,3 +131,9 @@ void TileLayer::setVisibleArea(const sf::IntRect &visibleArea) {
 bool TileLayer::isAnimated() {
     return m_isAnimated;
 }
+
+void TileLayer::setVisible(bool visible) {
+
+    m_isVisible = visible;
+
+}

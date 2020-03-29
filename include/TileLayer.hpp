@@ -19,6 +19,7 @@
 
 
 class TileMap;
+
 class TileLayer : public sf::Drawable, public sf::Transformable {
 public:
     TileLayer(const Tmx::TileLayer &tmxLayer, const TileMap &map);
@@ -43,6 +44,8 @@ public:
 
     void setVisibleArea(const sf::IntRect &visibleArea);
 
+    void setVisible(bool visible);
+
     bool isAnimated();
 
 
@@ -62,7 +65,7 @@ private:
     sf::IntRect m_visibleArea;
     bool m_isAnimated;
 
-    const TileMap& m_parent;
+    const TileMap &m_parent;
 
     std::vector<std::unique_ptr<Tile>> m_tiles;
 

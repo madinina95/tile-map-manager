@@ -31,6 +31,12 @@ public:
 
     std::string &getCurrentMap();
 
+    void drawFrom(int layerIndex);
+
+    void drawTo(int layerIndex);
+
+    TileLayer &getLayer(const std::string& name);
+
 protected:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
@@ -39,6 +45,5 @@ private:
     std::unique_ptr<TileMap> m_map;
     std::string m_cuurentMap;
 };
-
 
 #endif //MAPMANAGER_TILEMAPMANAGER_HPP
